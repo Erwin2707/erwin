@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Schilderwerk Calculatie</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      padding: 20px;
+    }
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      width: 100%;
+      margin-top: 15px;
+      padding: 10px;
+      background: #007acc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background: #005fa3;
+    }
+    .result {
+      margin-top: 20px;
+      background: #e6f7ff;
+      padding: 15px;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Schilderwerk Calculatie</h2>
+
+    <label>Oppervlakte (m²):</label>
+    <input type="number" id="oppervlakte" step="0.01" />
+
+    <label>Prijs per m² (€):</label>
+    <input type="number" id="prijs" step="0.01" />
+
+    <label>Materiaalkosten (€):</label>
+    <input type="number" id="materiaal" step="0.01" />
+
+    <label>Voorrijkosten (€):</label>
+    <input type="number" id="voorrij" step="0.01" />
+
+    <button onclick="bereken()">Bereken Offerte</button>
+
+    <div class="result" id="resultaat" style="display:none;"></div>
+  </div>
+
+  <script>
+    function bereken() {
+      const oppervlakte = parseFloat(document.getElementById("oppervlakte").value) || 0;
+      const prijs = parseFloat(document.getElementById("prijs").value) || 0;
+      const materiaal = parseFloat(document.getElementById("materiaal").value) || 0;
+      const voorrij = parseFloat(document.getElementById("voorrij").value) || 0;
+
+      const arbeidskosten = oppervlakte * prijs;
+      const totaal = arbeidskosten + materiaal + voorrij;
+
+      const resultaat = `
+        <strong>Offerte Overzicht:</strong><br>
+        Oppervlakte: ${oppervlakte.toFixed(2)} m²<br>
+        Arbeidskosten: €${arbeidskosten.toFixed(2)}<br>
+        Materiaalkosten: €${materiaal.toFixed(2)}<br>
+        Voorrijkosten: €${voorrij.toFixed(2)}<br>
+        <strong>TOTAAL: €${totaal.toFixed(2)}</strong>
+      `;
+
+      const div = document.getElementById("resultaat");
+      div.innerHTML = resultaat;
+      div.style.display = "block";
+    }
+  </script>
+</body>
+</html>
